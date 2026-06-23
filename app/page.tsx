@@ -1,6 +1,6 @@
-import { allBlogs } from ".contentlayer/generated";
+import { allBlogs } from "contentlayer/generated";
 import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
-import { allProjects } from ".contentlayer/generated";
+import { allProjects } from "contentlayer/generated";
 
 import Link from "@/app/components/Link";
 import PostList from "@/app/blog/components/PostList";
