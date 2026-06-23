@@ -2,9 +2,9 @@
 
 # Website
 
-This website is a clone of Brian Ruiz's personal portfolio website. All credit goes to Brian Ruiz for the design, features, and implementation.
+This website is a clone of Brian Ruiz's personal portfolio website. All credit goes to Brian Ruiz for the design, features and implementation.
 
-The original website was designed to be simplistic and clean while including features like MDX blog posts with view counts, a dark mode toggle, an about page, and more. I am grateful for their work and the permission to use it.
+The original website was designed to be simplistic and clean while including features like MDX blog posts with view counts, a dark mode toggle, an about page and more. I am grateful for his work and the permission to use it.
 
 You can check out his profile and projects here: [https://www.b-r.io/](https://github.com/BrianRuizy)
 
