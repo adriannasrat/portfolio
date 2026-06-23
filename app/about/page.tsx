@@ -87,10 +87,6 @@ export default function About() {
               channel, covering all things technology, coding vlogs, and
               personal development.
             </p> */}
-            <p>
-              When I&apos;m not studying, I am probably with my family, or
-              watching a movie :]
-            </p>
           </div>
         </Section>
         <Section heading="Connect" headingAlignment="left">
@@ -141,7 +137,7 @@ const workplaces = [
   {
     title: "Student",
     company: "Dalarna University",
-    date: "2024",
+    date: "2023 - 2026",
     imageSrc: duLogo,
     link: "https://www.du.se/en",
   },
