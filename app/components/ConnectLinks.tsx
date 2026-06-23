@@ -66,7 +66,7 @@ const ConnectLinks: ConnectLink[] = [
   },
   {
     label: "GitHub",
-    href: "https://github.com/aliadrian",
+    href: "https://github.com/adriannasrat",
     icon: <FaGithub />,
   },
   {
