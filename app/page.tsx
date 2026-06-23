@@ -29,9 +29,8 @@ export default function Home() {
             className="max-w-lg animate-in text-secondary"
             style={{ "--index": 1 } as React.CSSProperties}
           >
-            I&#39;m currently studying at Dalarna University in Sweden, where
-            I&#39;m deepening my passion for software development, creative
-            problem-solving, and building smart digital solutions.
+            I&#39;m a software developer focused on building modern digital
+            solutions with clarity, purpose and attention to detail.
             {/* design-oriented approach. In addition to coding, I make{" "}
             <Link href="https://youtube.com/@brianruizy">YouTube</Link> videos,
             where I focus on tech, and productivity. */}
