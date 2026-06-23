@@ -22,8 +22,7 @@ export default function Links() {
           >
             <h1 className="text-2xl font-bold tracking-tight">Adrian Nasrat</h1>
             <p className="mx-auto max-w-sm text-secondary">
-              Student at Dalarna University. Connect with me through my socials
-              and join my community
+              Connect with me through my socials and join my community
             </p>
           </div>
         </div>
