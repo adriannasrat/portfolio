@@ -1,12 +1,12 @@
 "use client";
 
-import type { Blog as PostType } from ".contentlayer/generated";
+import type { Blog as PostType } from "contentlayer/generated";
 import Post from "./Post";
 import React, { useRef, useState } from "react";
 
 function getRelativeCoordinates(
   event: React.MouseEvent<HTMLUListElement>,
-  referenceElement: any
+  referenceElement: any,
 ) {
   const position = {
     x: event.pageX,
@@ -52,7 +52,7 @@ export default function PostList({ posts }: PostListProps) {
     <ul
       ref={listRef}
       onMouseMove={(e) => handleMouseMove(e)}
-      className="flex flex-col animated-list"
+      className="animated-list flex flex-col"
     >
       {posts.length === 0 && <p>No posts found</p>}
       {posts.map((post) => (
