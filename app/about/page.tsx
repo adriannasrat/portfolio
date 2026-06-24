@@ -6,18 +6,19 @@ import Section from "@/app/components/Section";
 import ConnectLinks from "@/app/components/ConnectLinks";
 import Workplaces from "@/app/about/components/Workplaces";
 import Gallery from "@/app/about/components/Gallery";
+import Journey from "@/app/about/components/Journey";
 
 import duLogo from "public/work/du.png";
 import awLogo from "public/work/aw.png";
 
 import dalarnaUniversity from "public/gallery/dalarna-university.jpeg";
-import midsommar from "public/gallery/midsummer.jpeg";
+import mac from "public/gallery/programming.webp";
 import vasteras from "public/gallery/västerås.jpeg";
 
 export const metadata: Metadata = {
   title: "About | Adrian Nasrat",
   description:
-    "Junior Software Engineer and second-year student in the Information Systems program at Dalarna University. Passionate about building modern web applications, improving user experiences and sharing insights on frontend development and technology.",
+    "Junior Software Engineer with a degree in Information Systems from Dalarna University. Passionate about building modern web applications, improving user experiences and continuing to grow as a developer.",
 };
 
 export default function About() {
@@ -54,8 +55,8 @@ export default function About() {
           style={{ "--index": 2 } as React.CSSProperties}
         >
           <Image
-            src={midsommar}
-            alt={"midsummer"}
+            src={mac}
+            alt={"Programming on a MacBook"}
             width={220}
             height={260}
             className="pointer-events-none absolute inset-0 -top-48 left-[45%] w-48 rotate-6 rounded-xl bg-gray-400 object-cover shadow-md md:left-[60%] md:w-56"
@@ -73,8 +74,27 @@ export default function About() {
         <Section heading="About" headingAlignment="left">
           <div className="flex flex-col gap-6">
             <p>
-              Hi I&apos;m Adrian, born in Sweden and raised in Västerås. I have
-              been coding for {new Date().getFullYear() - 2022} years.
+              Hey, I&apos;m Adrian! I was born and raised in Sweden and I&apos;m
+              someone who has always enjoyed learning, creating and figuring out
+              how things work.
+            </p>
+            <p>
+              I&apos;m really into software development and have been coding for{" "}
+              {new Date().getFullYear() - 2022} years. I enjoy building websites
+              and applications, especially when I get to mix coding with design.
+              Turning ideas into something real and slowly improving them until
+              everything feels right is something I really enjoy and strive for.
+            </p>
+            <p>
+              Outside of coding, I like playing chess, getting hooked on a good
+              film or series and listening to music. So when I&apos;m not in
+              front of my computer, I&apos;m probably looking for something new
+              to watch or losing track of time over a chess match.
+            </p>
+            <p>
+              I recently finished my degree in System development and right now
+              I&apos;m just excited to keep building, learning and seeing where
+              things go next.
             </p>
             {/* <p>
               In addition to coding, I create content on my{" "}
@@ -118,7 +138,7 @@ export default function About() {
             ))}
           </ul>
         </Section>
-        <Section heading="Work" headingAlignment="left">
+        {/*    <Section heading="Work" headingAlignment="left">
           <div className="flex w-full flex-col gap-8">
             <p>
               I specialize in C#, React, web development and UI/UX. But I am
@@ -127,13 +147,24 @@ export default function About() {
             </p>
             <Workplaces items={workplaces} />
           </div>
+        </Section> */}
+        <Section heading="Journey" headingAlignment="left">
+          <div className="flex w-full flex-col gap-8">
+            <p className="max-w-2xl">
+              I specialize in C#, React, web development and UI/UX. I am always
+              learning new things. Explore my professional experience and
+              education below.
+            </p>
+
+            <Journey workplaces={workplaces} education={education} />
+          </div>
         </Section>
       </div>
     </div>
   );
 }
 
-const workplaces = [
+/* const workplaces = [
   {
     title: "Student",
     company: "Dalarna University",
@@ -147,5 +178,61 @@ const workplaces = [
     date: "2022 - 2023",
     imageSrc: awLogo,
     link: "https://www.academicwork.com/",
+  },
+];
+ */
+
+const workplaces = [
+  {
+    title: "IT Consultant",
+    organization: "Academic Work",
+    subtitle: "Hired consultant",
+    date: "2022 – 2023",
+    link: "https://www.academicwork.se/",
+  },
+  {
+    title: "Frontend Developer",
+    organization: "Ampilio",
+    subtitle: "Internship",
+    date: "2020 – 2021",
+    link: "https://www.ampilio.se/",
+  },
+];
+
+const education = [
+  {
+    title: "System Science Programme",
+    organization: "Dalarna University",
+    subtitle: "Bachelor's degree",
+    date: "2023 – 2026",
+    link: "https://www.du.se/sv/utbildning/Program/utbildningsplan/?code=DSVPG",
+  },
+  {
+    title: "C# .NET program",
+    organization: "Academic Work",
+    subtitle: "Completion of an intensive program",
+    date: "2022 – 2023",
+    link: "https://www.academicwork.se/",
+  },
+  {
+    title: "Frontend development",
+    organization: "EC Utbildning",
+    subtitle: "Higher vocational education",
+    date: "2019 – 2021",
+    link: "https://ecutbildning.se/",
+  },
+  {
+    title: "Computer Science",
+    organization: "Mälardalen University",
+    subtitle: "University studies",
+    date: "2017 – 2018",
+    link: "https://www.mdu.se/",
+  },
+  {
+    title: "Technology Program",
+    organization: "NTI Gymnasiet",
+    subtitle: "Upper secondary school",
+    date: "2014 – 2017",
+    link: "https://ntigymnasiet.se/",
   },
 ];

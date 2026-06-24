@@ -7,7 +7,7 @@ import clsx from "clsx";
 import localFont from "next/font/local";
 
 import vasteras from "public/gallery/västerås.jpeg";
-import midsummer from "public/gallery/midsummer.jpeg";
+import mac from "public/gallery/programming.webp";
 import dalarnaUniversity from "public/gallery/dalarna-university.jpeg";
 import logarangen from "public/gallery/lögarängen.jpeg";
 
@@ -162,9 +162,9 @@ export default function Gallery() {
           flipDirection="left"
         />
         <Photo
-          src={midsummer}
+          src={mac}
           meta="2023-06-24"
-          alt="Swedish Midsummer"
+          alt="Programming on a MacBook"
           width={220}
           height={260}
           rotate={-5.4}
