@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://a-n.io"),
   title: "Adrian Nasrat",
   description:
-    "Student at Dalarna University in Sweden, passionate about software development, problem-solving, and digital services. Eager to explore well-designed systems.",
+    "Passionate about software development, problem solving and digital services.",
   openGraph: {
     title: "Adrian Nasrat",
     url: "https://a-n.io/",
@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="width-full bg-contrast text-primary antialiased dark:bg-primary">
+      <body className="w-full bg-contrast text-primary antialiased dark:bg-primary">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navigation />
           <div className="mx-auto max-w-[700px] px-6 pb-24 pt-16 md:px-6 md:pb-44 md:pt-20">
