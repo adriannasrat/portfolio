@@ -17,7 +17,7 @@ import vasteras from "public/gallery/västerås.jpeg";
 export const metadata: Metadata = {
   title: "About | Adrian Nasrat",
   description:
-    "Junior Software Engineer and second-year student in the Information Systems program at Dalarna University. Passionate about building modern web applications, improving user experiences, and sharing insights on front-end development and technology.",
+    "Junior Software Engineer and second-year student in the Information Systems program at Dalarna University. Passionate about building modern web applications, improving user experiences and sharing insights on frontend development and technology.",
 };
 
 export default function About() {

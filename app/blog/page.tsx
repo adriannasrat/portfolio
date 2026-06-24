@@ -5,11 +5,11 @@ import PostList from "@/app/blog/components/PostList";
 export const metadata: Metadata = {
   title: "Blog | Adrian Nasrat",
   description:
-    "I write about programming, design, and occasionally life updates!",
+    "I write about programming, design and occasionally life updates!",
   openGraph: {
     title: "Blog | Adrian Nasrat",
     description:
-      "I write about programming, design, and occasionally life updates!",
+      "I write about programming, design and occasionally life updates!",
     type: "website",
     url: "https://a-n.io/blog/Blog",
     images: [{ url: "https://a-n.io/api/og?title=Blog", alt: "Blog" }],

@@ -13,8 +13,6 @@ I started this side project because I wanted a simple, modern dictionary app tha
 
 It's nothing too fancy, just a small project that aims to make learning new words a little more enjoyable.
 
-It's been fun to see people use it and get value out of it.
-
 <Alert>
 For a public example of my work, check out this project:
 
@@ -25,9 +23,9 @@ For a public example of my work, check out this project:
 
 ## Data Sources
 
-The data for this project primarily comes from the Free [Dictionary API](https://dictionaryapi.dev/), which provides comprehensive information on word meanings, pronunciation, and usage. Additional assets, such as icons and fonts, were carefully selected from reliable sources to enhance the user experience and align with modern design standards.
+The data for this project primarily comes from the Free [Dictionary API](https://dictionaryapi.dev/), which provides comprehensive information on word meanings, pronunciation and usage. Additional assets, such as icons and fonts, were carefully selected from reliable sources to enhance the user experience and align with modern design standards.
 
-Accuracy and reliability of data were key priorities for this project. By selecting trusted data sources and incorporating them thoughtfully, the aim was to provide a robust and informative user experience, where users could explore words in a dynamic, yet precise way. Providing incorrect or incomplete information could lead to user frustration, which is why each element, from definitions to audio pronunciations, was implemented with care.
+Accuracy and reliability of data were key priorities for this project. By selecting trusted data sources and incorporating them thoughtfully, the aim was to provide an informative user experience, where users could explore words in a dynamic, yet precise way. Providing incorrect or incomplete information could lead to user frustration, which is why each element, from definitions to audio pronunciations, was implemented with care.
 
 <Image
   width={600}
@@ -41,13 +39,13 @@ Accuracy and reliability of data were key priorities for this project. By select
 
 This project was built using modern web technologies, starting with React for a dynamic and responsive user interface. To manage state and theming, React Context API was utilized, enabling seamless font and theme switching across components. Tailwind CSS was used to implement the design system, allowing for a clean and consistent look and feel throughout the application.
 
-The application integrates with the Free Dictionary API to retrieve word data. Axios was used for API requests, ensuring efficient data fetching and error handling. To manage routing, React Router was employed, providing a smooth navigation experience. Lastly, for deployment, Vercel was used, making the project easily accessible to users worldwide. This combination of technologies ensured a performant, scalable, and user-friendly dictionary web application.
+The application integrates with the Free Dictionary API to retrieve word data. Axios was used for API requests, ensuring efficient data fetching and error handling. To manage routing, React Router was employed, providing a smooth navigation experience. Lastly, for deployment, Vercel was used, making the project easily accessible to users worldwide. This combination of technologies ensured a performant, scalable and user-friendly dictionary web application.
 
 <CustomCard />
 
 ## Front-end Design
 
-The general approach of the application is to provide an interactive interface for exploring word definitions, pronunciation, and related information. The user can search for any word, and the results are presented in a well-organized format that includes phonetics, meanings, and usage examples. The application also offers audio pronunciation to enhance the learning experience.
+The general approach of the application is to provide an interactive interface for exploring word definitions, pronunciation and related information. The user can search for any word and the results are presented in a well-organized format that includes phonetics, meanings and usage examples. The application also offers audio pronunciation to enhance the learning experience.
 
 The design was created to be both aesthetically pleasing and highly functional, ensuring the interface adapts seamlessly across different devices and screen sizes. Tailwind CSS allowed for easy creation of responsive layouts, making sure the content was accessible and visually appealing on both desktop and mobile devices. The light and dark theme toggle, along with font-switching options, further improve the usability and accessibility of the app, providing a personalized experience for each user.
 
@@ -69,7 +67,7 @@ The following is an overview of how different components interact within the app
 
 ### 1. Data Fetching and State Management
 
-The data is retrieved from the Free Dictionary API using Axios. This ensures that users receive comprehensive and up-to-date word definitions, phonetics, and usage examples.
+The data is retrieved from the Free Dictionary API using Axios. This ensures that users receive comprehensive and up-to-date word definitions, phonetics and usage examples.
 
 ```js showLineNumbers {3, 8-9}
 import axios from "axios";
@@ -92,7 +90,7 @@ This function retrieves word data from the API and handles any errors during the
 
 ### 2. Handling User Input
 
-The search feature allows users to type in a word, and it triggers a data fetch. Error handling is implemented to notify users if the word is not found.
+The search feature allows users to type in a word and it triggers a data fetch. Error handling is implemented to notify users if the word is not found.
 
 ```js showLineNumbers {3-4}
 const handleSearch = async (userInput) => {
@@ -161,4 +159,4 @@ The container ensures that the main components are centered and properly spaced 
 
 In the end, we have a fully functional dictionary web app that is responsive across different devices and offers an intuitive, enjoyable user experience. The seamless integration of various modern web technologies makes the application a robust tool for learning new words.
 
-So, did I achieve my initial goal? I believe I did. It's been immensely gratifying to see users engage with the app and benefit from it. If you're a developer and wish to contribute to this ongoing project, feel free to check out the [GitHub repository ](https://github.com/adriannasrat/dictionary-web-app) for more details.
+If you're a developer and wish to contribute to this ongoing project, feel free to check out the [GitHub repository ](https://github.com/adriannasrat/dictionary-web-app) for more details.
