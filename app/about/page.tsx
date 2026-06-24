@@ -222,13 +222,6 @@ const education = [
     link: "https://ecutbildning.se/",
   },
   {
-    title: "Computer Science",
-    organization: "Mälardalen University",
-    subtitle: "University studies",
-    date: "2017 – 2018",
-    link: "https://www.mdu.se/",
-  },
-  {
     title: "Technology Program",
     organization: "NTI Gymnasiet",
     subtitle: "Upper secondary school",
