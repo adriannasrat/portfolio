@@ -71,7 +71,7 @@ export default function Home() {
         <p className="tracking-tight text-secondary">Pinned Projects</p>
         <ProjectList
           projects={projects.filter(
-            (project) => !excluded.includes(project.slug),
+            (project) => !excluded.includes(project.slug) && !project.draft,
           )}
         />
       </div>

@@ -137,6 +137,7 @@ const projects = [
     description: "Web app displaying country data with a theme switcher.",
     image: Countries,
     link: "/projects/countries",
+    draft: true,
   },
   {
     name: "Dictionary",

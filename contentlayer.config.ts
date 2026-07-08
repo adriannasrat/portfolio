@@ -72,6 +72,7 @@ export const Project = defineDocumentType(() => ({
     date: { type: "string", required: true },
     url: { type: "string", required: false },
     tags: { type: "json", required: false },
+    draft: { type: "boolean", required: false, default: false },
   },
   computedFields: projectComputedFields,
 }));
