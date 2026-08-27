@@ -1,101 +1,221 @@
 ---
 title: "Countries"
-date: "2024"
-summary: "I completed a project focusing on API integration and state management."
-longSummary: "I completed a challenge on Frontend Mentor, where I built a REST Countries API with a color theme switcher. This project involved integrating a RESTful API, managing state effectively and implementing a dark/light mode, enhancing my skills in modern frontend development."
+date: "2026"
+summary: "A production-ready country explorer with persistent filters, accessible navigation and responsive country details."
+longSummary: "A complete rebuild of the REST Countries challenge into a production-ready React application. The project combines normalized API data, URL-driven search and pagination, resilient routing, persistent themes, accessible interactions and careful performance work across mobile and desktop."
 url: "https://countries-api-by-adrian.vercel.app/"
-draft: true
-tags:
-  ["Web Development", "Design", "Branding", "UI/UX", "Tailwind.css", "React.js"]
+tags: ["React", "Vite", "Tailwind CSS", "Accessibility", "REST API"]
 ---
 
 <Alert>
-For a public example of my work, check out this project:
+Explore the finished application and its source code:
 
 - [Live Demo](https://countries-api-by-adrian.vercel.app/)
-- [Code on GitHub](https://github.com/adriannasrat/countries-api)
+- [Code on GitHub](https://github.com/adriannasrat/countries)
 
 </Alert>
 
-### About Frontend Mentor
+## From frontend challenge to production application
 
-Frontend Mentor is a platform that helps developers improve their coding skills by building real world projects. It provides professionally designed challenges that focus on HTML, CSS and JavaScript, allowing developers to practice their skills, build projects and receive feedback from a supportive community. This hands-on approach helps participants learn effectively and gain confidence in their development abilities.
+Countries began as a Frontend Mentor challenge: fetch country data, provide a
+search field, filter by region and display a detailed country view. I used the
+brief as a starting point, then rebuilt the project as a complete product rather
+than treating it as a static implementation exercise.
 
-<LinkPreview
-  title="Frontend mentor"
-  imageUrl="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1744&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  description="Frontend Mentor provides real-world coding challenges to help developers sharpen their frontend skills by building professional projects using HTML, CSS and JavaScript. Learn more about the platform"
-  link="https://www.frontendmentor.io"
-/>
-
-## A Fresh New Approach
-
-When I took on the Frontend Mentor REST Countries API challenge, I saw an opportunity to build an engaging user experience. The project required integrating the API, which presented a chance to create a responsive, user-friendly design.
-
-I took the initiative to design a modern UI with intuitive features, such as search, filtering and a dark/light theme switcher. The result was a polished and accessible web application that enhanced user interaction, demonstrating my skills in UI/UX design and frontend development.
+The finished application lets users browse 250 countries, combine search and
+regional filtering, move through paginated results and navigate directly between
+bordering countries. Search, region and page values are stored in the URL, so a
+filtered view can be refreshed, bookmarked or shared without losing its state.
 
 <Image
   src="/projects/countries/desktop-preview.jpg"
-  alt="design"
-  width={1458}
-  height={761}
+  alt="Countries application showing the country grid in light mode and Belgium details in dark mode"
+  width={900}
+  height={660}
   contained
   size="lg"
+  caption="The application combines a searchable country overview with detailed country pages and persistent light and dark themes."
 />
 
-### Introducing a Modern Design Approach
+## The product goals
 
-For the REST Countries API project, I focused on creating a unique and visually appealing design. Using modern tools, I defined a fresh color palette, selected appropriate typography and created reusable components. This process helped differentiate the app from generic templates.
+The central challenge was not simply displaying API data. The experience also
+needed to remain predictable as users searched, changed pages, opened a country
+and returned to the result they had been viewing.
 
-<Image
-  src="/projects/countries/image.png"
-  alt="design"
-  width={1458}
-  height={761}
-  size="lg"
-/>
+I defined five goals for the rebuild:
 
-Learning to design and build the project independently helped me improve my collaboration skills and strengthened my end-to-end development capabilities. By managing the design myself, I ensured a efficient process without needing external resources, which made the project more streamlined and provided greater creative control.
+- **Preserve context:** filters, pagination and scroll position should survive
+  navigation to a country and back.
+- **Design mobile first:** cards, controls and detail views should reflow cleanly
+  without compressed layouts or horizontal scrolling.
+- **Treat accessibility as architecture:** semantics, focus management, live
+  announcements and reduced motion should be part of the implementation.
+- **Handle external data defensively:** incomplete records and failed flag images
+  should never break the interface.
+- **Ship a production build:** routing, metadata, caching, error states and loading
+  behavior should work outside the local development environment.
+
+## A stable data and routing architecture
+
+Country data is requested through a dedicated API layer and normalized before it
+reaches the interface. This gives the components a stable internal model even
+when the external response contains missing or differently shaped values. The
+same layer caches successful results and deduplicates concurrent requests, which
+avoids repeated network work when moving between the overview and detail pages.
+
+```js showLineNumbers
+let countriesCache = null;
+let countriesRequest = null;
+
+export async function fetchCountries({ force = false } = {}) {
+  if (!force && countriesCache) return countriesCache;
+  if (!force && countriesRequest) return countriesRequest;
+
+  const request = fetch(COUNTRIES_API_URL).then(async (response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch countries");
+    }
+
+    const countries = await response.json();
+    return countries.map(normalizeCountry);
+  });
+
+  countriesRequest = request;
+
+  try {
+    countriesCache = await request;
+    return countriesCache;
+  } finally {
+    if (countriesRequest === request) {
+      countriesRequest = null;
+    }
+  }
+}
+```
+
+React Router drives both page navigation and the state of the country list. A URL
+such as `/?search=sw&region=Europe&page=2` fully describes the current view.
+Pagination changes intentionally return the user to the filters, while browser
+Back navigation restores the exact scroll position they left behind. Direct
+routes such as `/country/SWE` also work after a refresh through the production
+Vercel rewrite configuration.
+
+```js showLineNumbers
+const [searchParams, setSearchParams] = useSearchParams();
+const searchQuery = searchParams.get("search") ?? "";
+
+function handleSearchChange(value) {
+  setSearchParams(
+    (currentParams) => {
+      const nextParams = new URLSearchParams(currentParams);
+
+      if (value) {
+        nextParams.set("search", value);
+      } else {
+        nextParams.delete("search");
+      }
+
+      return nextParams;
+    },
+    { replace: true },
+  );
+}
+```
+
+## Designing for every viewport
+
+The responsive system uses one shared page container for the navigation, filter
+controls, country grid, loading states and country details. This keeps every
+screen aligned and prevents individual pages from developing slightly different
+widths or padding rules.
+
+The country grid progresses deliberately from one to four columns rather than
+using unpredictable automatic sizing. Flag areas use controlled aspect ratios,
+cards maintain consistent proportions and the detail layout only becomes
+two-column when there is enough room for both the flag and information panel.
 
 <Image
   src="/projects/countries/figma-image.webp"
-  alt="dashboard"
+  alt="Responsive design exploration for the Belgium country details page across desktop, tablet and mobile layouts"
   width={1462}
   height={1108}
   size="lg"
-  caption="Developing an engaging and interactive interface elevated the user experience, allowing users to efficiently explore country data through features like searching, filtering and a theme switcher."
-/>
-
-### Introducing React and Tailwind CSS
-
-For the Frontend Mentor REST Countries API challenge, I used React.js and Tailwind CSS to create a responsive, dynamic application that meets several user requirements:
-
-- **Component-Based Architecture**: React's encapsulated components made creating dynamic UI elements easy and reusable, simplifying development and debugging.
-- **Responsive Design**: Tailwind CSS enabled a mobile-first workflow that adapted layouts based on device size, ensuring a seamless user experience.
-- **Enhanced User Interaction**: Implemented features like search, filter and navigation through border countries, providing intuitive user flows.
-- **Dark/Light Mode**: Added theme switching for a personalized user experience.
-- **Developer Experience**: React's declarative syntax and Tailwind's utility-first approach made the development process efficient and enjoyable.
-
----
-
-## The REST Countries API Project
-
-This project serves as an interactive hub for users to explore data about countries across the globe. Users can search for countries, filter by region and navigate through bordering nations, providing a comprehensive experience.
-
-Starting as a simple CRUD-based application, it evolved into a robust data management platform featuring responsive layouts, dark/light theme switching and a seamless interface for a detailed country overview. The project highlights my skills in frontend development, API integration and crafting efficient user experiences.
-
-<Image
-  src="/projects/countries/table-1.png"
-  alt="tables"
-  width={1408}
-  height={927}
   contained
+  caption="Early responsive exploration established how country details, navigation and border links should adapt across breakpoints."
 />
+
+## Theme without compromise
+
+The theme toggle supports explicit light and dark preferences while respecting
+the operating system when the user has not made a choice. An explicit selection
+is persisted in local storage and applied to the document before React renders,
+preventing a flash of the wrong theme during reloads.
+
+Every elevated surface, control, skeleton, error message and focus indicator was
+reviewed in both themes. The result is one coherent interface rather than a dark
+palette applied only to the main screens.
 
 <Image
   src="/projects/countries/nav-1.png"
-  alt="nav"
+  alt="Mobile Belgium details page displayed side by side in dark and light themes"
   width={1408}
   height={927}
   contained
+  size="lg"
+  caption="Light and dark themes preserve the same hierarchy, readability and responsive behavior."
 />
+
+## Accessibility built into the interaction model
+
+The application was audited as a keyboard, screen-reader and reduced-motion
+experience and not only as a visual interface. The implementation includes:
+
+- semantic headings, forms, lists and named navigation landmarks;
+- a skip link and managed focus after route navigation;
+- visible focus states for every interactive control;
+- live announcements for result counts and empty states;
+- descriptive flag alternatives and accessible pagination states;
+- animations that respect `prefers-reduced-motion`; and
+- complete mobile reflow without horizontal scrolling at 320 pixels.
+
+During the production audit, Lighthouse scored the deployed application **100 for
+accessibility**, **100 for best practices** and **100 for SEO**.
+
+## Performance and resilience
+
+The Home, Country Details and Not Found routes are loaded as separate bundles.
+Above-the-fold flags receive higher loading priority, later images are lazy
+loaded and decoded asynchronously, and preconnections reduce the setup cost of
+external requests. Flag rendering also falls through multiple image sources and
+finally to a readable fallback instead of exposing a broken image.
+
+Loading skeletons mirror the final grid to reduce layout movement. Failed API
+requests produce a focused error state with retry support, missing country values
+receive clear fallbacks and unknown URLs render a dedicated 404 page.
+
+The production Lighthouse audit reached a **93 performance score**, with zero
+total blocking time and zero cumulative layout shift in the measured run.
+
+## Technology and responsibilities
+
+- **React 19** for component composition and application state
+- **React Router 6** for data routing, URL state and navigation restoration
+- **Vite 8** for development and optimized production builds
+- **Tailwind CSS 4** for the responsive design system and theme variants
+- **countries.dev** for country information and flag sources
+- **Vercel** for deployment, SPA rewrites, caching and response headers
+
+I owned the complete implementation: interface architecture, responsive design,
+API normalization, navigation behavior, accessibility, animation, performance
+work, deployment configuration and production verification.
+
+## Outcome
+
+What started as a compact API challenge became an exercise in building a mature
+frontend experience. The most valuable outcome was learning to treat seemingly
+small behaviors such as restoring scroll position, preserving filters, announcing result
+changes and handling failed images as core product requirements.
+
+The result is a responsive and resilient country explorer that remains easy to
+use across devices, input methods, themes and navigation paths.

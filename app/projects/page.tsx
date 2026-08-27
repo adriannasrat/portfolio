@@ -131,14 +131,14 @@ export default function Projects() {
 }
 
 const projects = [
-  /*   {
+  {
     name: "Countries",
     category: "Website",
-    description: "Web app displaying country data with a theme switcher.",
+    description:
+      "An accessible country explorer with persistent filters and responsive details.",
     image: Countries,
     link: "/projects/countries",
-    draft: true,
-  }, */
+  },
   {
     name: "Dictionary",
     category: "Website",
